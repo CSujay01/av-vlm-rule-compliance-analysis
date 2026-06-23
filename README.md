@@ -1,39 +1,41 @@
-AV VLM Rule Compliance Analysis
+# Autonomous Vehicles — Obstacle Negotiation & Rule-Compliance Analysis
 
-This project analyzes recurring failure patterns observed in autonomous vehicle and VLM-related workflows, with a focus on perception confidence, obstacle negotiation, intersection behavior, and traffic rule compliance.
+An independent analysis of recurring rule-compliance and obstacle-negotiation
+failures in autonomous-vehicle perception systems, based on real labelling and
+annotation-quality work on Level-4 AV perception data (ego-motion, VLM, deep maps).
 
-The analysis was built from real operational observations involving complex driving environments where decision timing, visibility conditions, and interaction handling directly impacted system behavior.
+## What's in this repo
 
-Focus Areas
+| File | What it is |
+|------|------------|
+| `Obstacle Negotiation & Rule Compliance Analysis.pdf` | The analysis write-up: observed failure modes, impact, and suggested improvements, framed against functional safety (SOTIF) and Level-4 validation. |
+| `AV_Obstacle_negotiation_&_Rule_Compliance_Analysis.ipynb` | A reproducible notebook demonstrating the analysis methodology on a small synthetic dataset. |
 
-* Intersection negotiation behavior
-* Traffic signal and stop sign compliance
-* Perception failures under glare/shadow conditions
-* Obstacle handling near intersections
-* Intent prediction and delayed decision-making
-* Operational failure pattern analysis
+## The real observation
 
- Key Findings
+While annotating AV perception data for Level-4 driving, I observed recurring
+failure patterns at complex and occluded intersections — primarily failure-to-yield,
+late braking, and path ambiguity near obstacles — concentrated under poor-visibility
+conditions (glare, shadows) and around parked or lead vehicles. These are documented
+in the write-up.
 
-* Rule compliance failures increased near complex intersection interactions
-* Bright lighting and glare reduced perception confidence
-* Delayed interpretation of surrounding vehicle intent impacted decision quality
-* Competing priorities between obstacle negotiation and traffic rule enforcement created instability
+## The methodology demo (and its limits)
 
- Suggested Improvements
+The notebook reproduces the *shape* of the analysis on a small synthetic dataset,
+so the method is shareable without exposing any proprietary data.
 
-* Improve training coverage for high-interaction intersection scenarios
-* Refine labeling guidelines for obstacle negotiation near traffic controls
-* Improve perception robustness under difficult lighting conditions
-* Improve intent prediction during close-range vehicle interactions
+**Important:** the synthetic violation rule is injected by design. The resulting
+rates (8.8% vs 15.3%) therefore reflect that injected rule — they are an illustration
+of the pipeline, **not** an empirical finding. The real-world pattern lives in the
+write-up, derived from the perception work; the notebook only shows how such data
+would be processed and visualised.
 
- Tools & Workflow Context
+## Tools
 
-* Super Annotate workflows
-* VLM operational analysis
-* Scenario-based failure review
-* Human-in-the-loop analysis
+Python · pandas · NumPy · matplotlib · annotation tooling (SuperAnnotate,
+human-in-the-loop) for the underlying real-world work.
 
-Notes
+## Note on data
 
-This repository is intended for educational and portfolio purposes only. Any confidential/internal identifiers or sensitive references have been removed.
+No proprietary data is included. All data in the notebook is synthetic and
+generated in-code.
